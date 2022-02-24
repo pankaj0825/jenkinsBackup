@@ -1,0 +1,69 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@1145.v7f2433caa07f">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.9.3"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@1.9.3">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2648.va9433432b33c">
+    <script>pipeline {
+    agent any
+	tools {
+	    maven &apos;maven-3.8.4&apos;
+	 	}
+	stages {
+	    stage(&apos;Git CheckOut&apos;) {
+		    steps {
+			   git credentialsId: &apos;0c4d1887-8697-4464-b673-372be88bb681&apos;, url: &apos;git@github.com:pankaj0825/live-clock.git&apos;
+			}
+		}
+        stage(&apos;Clean and Install&apos;) {
+            steps {
+                sh &quot;mvn clean install&quot;
+            }
+        }
+        stage (&apos;Package&apos;){
+            steps {
+                sh &quot;mvn package&quot;
+             }
+        }
+	stage (&apos;Uploading artifacts to Nexus Repo&apos;) {
+            steps {
+               nexusArtifactUploader artifacts: [
+                   [
+                       artifactId: &apos;maven-project&apos;, 
+                       classifier: &apos;&apos;, 
+                       file: &apos;webapp/target/webapp.war&apos;, 
+                       type: &apos;war&apos;
+                    ]
+                ], 
+                credentialsId: &apos;1784baae-1db4-4aeb-99d2-8021a2d383af&apos;, 
+                groupId: &apos;Maven-Nexus-Pipeline&apos;, 
+                nexusUrl: &apos;44.202.43.223:8081&apos;, 
+                nexusVersion: &apos;nexus3&apos;, 
+                protocol: &apos;http&apos;, 
+                repository: &apos;maven-snapshots&apos;, 
+                version: &apos;1.0-SNAPSHOT&apos;
+            }
+        }
+        stage (&quot;notifying slack&quot;) {
+            steps {
+                slackSend channel: &apos;#jenkins&apos;, 
+                teamDomain: &apos;devops-ogv4823.slack.com&apos;, 
+                tokenCredentialId: &apos;3e187e04-7760-495b-844b-b17b2a2d3f1c&apos;
+            }
+        }
+    }
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>

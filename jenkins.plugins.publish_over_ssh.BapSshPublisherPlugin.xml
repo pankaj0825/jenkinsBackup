@@ -1,0 +1,81 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<jenkins.plugins.publish__over__ssh.BapSshPublisherPlugin_-Descriptor plugin="publish-over-ssh@1.22">
+  <hostConfigurations>
+    <jenkins.plugins.publish__over__ssh.BapSshHostConfiguration>
+      <name></name>
+      <hostname></hostname>
+      <username></username>
+      <secretPassword>{AQAAABAAAAAQRxiEG6qh2mtn/0Swmq28f0zc1/JhZIFZKrnbDG6iuOE=}</secretPassword>
+      <remoteRootDir></remoteRootDir>
+      <port>22</port>
+      <commonConfig class="jenkins.plugins.publish_over_ssh.BapSshCommonConfiguration">
+        <secretPassphrase>{AQAAABAAAAAQlBu1sflLLssubcZbqOb7jZFTXGDNuoxUhFviRSFIMxA=}</secretPassphrase>
+        <key></key>
+        <keyPath></keyPath>
+        <disableAllExec>false</disableAllExec>
+      </commonConfig>
+      <timeout>300000</timeout>
+      <overrideKey>false</overrideKey>
+      <disableExec>false</disableExec>
+      <keyInfo>
+        <secretPassphrase>{AQAAABAAAAAQKT+Jc0VLDMUVWQSIARmlOGUp5LQBgqAKQyhfTW+9EvU=}</secretPassphrase>
+        <key></key>
+        <keyPath></keyPath>
+      </keyInfo>
+      <jumpHost></jumpHost>
+      <proxyType></proxyType>
+      <proxyHost></proxyHost>
+      <proxyPort>0</proxyPort>
+      <proxyUser></proxyUser>
+      <proxyPassword></proxyPassword>
+    </jenkins.plugins.publish__over__ssh.BapSshHostConfiguration>
+    <jenkins.plugins.publish__over__ssh.BapSshHostConfiguration>
+      <name>Ansible-Server</name>
+      <hostname>172.31.83.188</hostname>
+      <username>ansadmin</username>
+      <secretPassword>{AQAAABAAAAAQmHs4QJ60hZZ2ynZbEv9nb4JrGx1gIRga6spUkKuB7Rc=}</secretPassword>
+      <remoteRootDir></remoteRootDir>
+      <port>22</port>
+      <commonConfig class="jenkins.plugins.publish_over_ssh.BapSshCommonConfiguration" reference="../../jenkins.plugins.publish__over__ssh.BapSshHostConfiguration/commonConfig"/>
+      <timeout>300000</timeout>
+      <overrideKey>true</overrideKey>
+      <disableExec>false</disableExec>
+      <keyInfo>
+        <secretPassphrase>{AQAAABAAAAAQGKHLQAShMtM/AQz2RosQmp3u6ffEjxD42WTQnfqw5bU=}</secretPassphrase>
+        <key></key>
+        <keyPath></keyPath>
+      </keyInfo>
+      <jumpHost></jumpHost>
+      <proxyType></proxyType>
+      <proxyHost></proxyHost>
+      <proxyPort>0</proxyPort>
+      <proxyUser></proxyUser>
+      <proxyPassword></proxyPassword>
+    </jenkins.plugins.publish__over__ssh.BapSshHostConfiguration>
+    <jenkins.plugins.publish__over__ssh.BapSshHostConfiguration>
+      <name>Docker-Host</name>
+      <hostname>172.31.85.64</hostname>
+      <username>dockeradmin</username>
+      <secretPassword>{AQAAABAAAAAQpcPadbQAyjacjlBwykrIXgLqXU/mqE52ScHaEPqPyyc=}</secretPassword>
+      <remoteRootDir></remoteRootDir>
+      <port>22</port>
+      <commonConfig class="jenkins.plugins.publish_over_ssh.BapSshCommonConfiguration" reference="../../jenkins.plugins.publish__over__ssh.BapSshHostConfiguration/commonConfig"/>
+      <timeout>300000</timeout>
+      <overrideKey>true</overrideKey>
+      <disableExec>false</disableExec>
+      <keyInfo>
+        <secretPassphrase>{AQAAABAAAAAQiWfK1LoOkegHVcXkdoqS2YGVuDN1s00fzvteGcQWUgs=}</secretPassphrase>
+        <key></key>
+        <keyPath></keyPath>
+      </keyInfo>
+      <jumpHost></jumpHost>
+      <proxyType></proxyType>
+      <proxyHost></proxyHost>
+      <proxyPort>0</proxyPort>
+      <proxyUser></proxyUser>
+      <proxyPassword></proxyPassword>
+    </jenkins.plugins.publish__over__ssh.BapSshHostConfiguration>
+  </hostConfigurations>
+  <commonConfig reference="../hostConfigurations/jenkins.plugins.publish__over__ssh.BapSshHostConfiguration/commonConfig"/>
+  <defaults class="jenkins.plugins.publish_over_ssh.options.SshPluginDefaults"/>
+</jenkins.plugins.publish__over__ssh.BapSshPublisherPlugin_-Descriptor>

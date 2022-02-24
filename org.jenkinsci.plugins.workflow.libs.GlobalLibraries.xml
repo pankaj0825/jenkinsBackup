@@ -1,0 +1,20 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<org.jenkinsci.plugins.workflow.libs.GlobalLibraries plugin="workflow-cps-global-lib@552.vd9cc05b8a2e1">
+  <libraries>
+    <org.jenkinsci.plugins.workflow.libs.LibraryConfiguration>
+      <name>shared-library</name>
+      <retriever class="org.jenkinsci.plugins.workflow.libs.SCMSourceRetriever">
+        <scm class="jenkins.plugins.git.GitSCMSource" plugin="git@4.10.1">
+          <id>349fabbc-5518-4d8c-a1d3-d759defa4588</id>
+          <remote>git@github.com:pankaj0825/Jenkinsfile.git</remote>
+          <credentialsId></credentialsId>
+          <traits/>
+        </scm>
+      </retriever>
+      <defaultVersion>main</defaultVersion>
+      <implicit>false</implicit>
+      <allowVersionOverride>true</allowVersionOverride>
+      <includeInChangesets>true</includeInChangesets>
+    </org.jenkinsci.plugins.workflow.libs.LibraryConfiguration>
+  </libraries>
+</org.jenkinsci.plugins.workflow.libs.GlobalLibraries>

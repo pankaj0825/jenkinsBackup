@@ -1,0 +1,77 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@1145.v7f2433caa07f">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.9.3"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@1.9.3">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2648.va9433432b33c">
+    <script>pipeline {
+    agent any
+	tools {
+	    maven &apos;maven-3.8.4&apos;
+	 	}
+	stages {
+	    stage(&apos;Git CheckOut&apos;) {
+		    steps {
+			   git credentialsId: &apos;0c4d1887-8697-4464-b673-372be88bb681&apos;, url: &apos;git@github.com:pankaj0825/live-clock.git&apos;
+			}
+		}
+        stage(&apos;Clean and Install&apos;) {
+            steps {
+                sh &quot;mvn clean install&quot;
+            }
+        }
+        stage (&apos;Package&apos;){
+            steps {
+                sh &quot;mvn package&quot;
+             }
+        }
+	stage (&apos;Server&apos;){
+            steps {
+               rtServer (
+                 id: &quot;Jfrog-Artifactory&quot;,
+                 url: &apos;http://3.239.218.137:8081/artifactory&apos;,
+                 username: &apos;jenkins&apos;,
+                  password: &apos;jenkins@123&apos;,
+                  bypassProxy: true,
+                   timeout: 300
+                        )
+            }
+        }
+        stage(&apos;Upload&apos;){
+            steps{
+                rtUpload (
+                 serverId:&quot;Jfrog-Artifactory&quot; ,
+                  spec: &apos;&apos;&apos;{
+                   &quot;files&quot;: [
+                      {
+                      &quot;pattern&quot;: &quot;*.war&quot;,
+                      &quot;target&quot;: &quot;libs-snapshot-local&quot;
+                      }
+                            ]
+                           }&apos;&apos;&apos;,
+                        )
+            }
+        }
+        stage (&apos;Publish build info&apos;) {
+            steps {
+                rtPublishBuildInfo (
+                    serverId: &quot;Jfrog-Artifactory&quot;
+                )
+            }
+        }
+    }
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
